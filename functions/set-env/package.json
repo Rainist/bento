@@ -1,0 +1,30 @@
+{
+  "name": "bento",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rainist/bento.git"
+  },
+  "keywords": [
+    "travis",
+    "environment",
+    "variables"
+  ],
+  "author": "Heechul Ryu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rainist/bento/issues"
+  },
+  "homepage": "https://github.com/rainist/bento#readme",
+  "dependencies": {
+    "lodash": "4.17.11",
+    "request": "2.88.0",
+    "request-promise": "4.2.2",
+    "rxjs": "6.3.3"
+  }
+}

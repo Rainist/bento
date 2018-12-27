@@ -1,0 +1,33 @@
+[
+  {
+    "name": "TEST_1",
+    "value": "TEST_1",
+    "rewrite": true,
+    "public": true
+  },
+  {
+    "name": "TEST_2",
+    "value": "TEST_2",
+    "rewrite": true,
+    "public": false
+  },
+  {
+    "name": "TEST_4",
+    "value": "TEST_4",
+    "rewrite": false,
+    "public": false
+  },
+  {
+    "name": "TEST_5",
+    "value": "TEST_5",
+    "rewrite": true,
+    "public": true
+  },
+  {
+    "name": "TEST_3",
+    "value": "TEST_3",
+    "rewrite": true,
+    "public": true
+  }
+]
+
