@@ -1,0 +1,82 @@
+<style>
+  .normal { color: gray; }
+  .loading { color: darkcyan; }
+  .success { color: darkgreen; }
+  .fail { color: brown; }
+</style>
+<h1>Bento <small><small>set env to travis</small></small> </h1>
+<div>
+  Repo: {{{orgName}}}/<input id="repo_name" placeholder="repo-name"/>
+</div>
+<div>
+  Performer: <input id="who" placeholder="Your name"/>
+</div>
+<button id="submit"> submit </button>
+<p></p>
+<pre id="status" class="normal"> status will show up here once you press submit </pre>
+<script type="text/javascript">
+  const config = {
+    host: '{{{host}}}',
+    orgName: '{{{orgName}}}'
+  }
+
+  const { orgName, host } = config
+
+  const submitBtn = document.getElementById('submit')
+  const statusDiv = document.getElementById('status')
+
+  const repoNameInput = document.getElementById('repo_name')
+  const whoInput = document.getElementById('who')
+
+  submitBtn.addEventListener('click', async () => {
+    statusDiv.innerHTML = "Loading..."
+    statusDiv.className = "loading"
+    submitBtn.disabled = true
+
+    try {
+
+    const repoName = repoNameInput.value
+    const who = whoInput.value
+
+    if (!repoName) {
+      throw new Error("Please fill Repo above")
+    }
+
+    if (!who) {
+      throw new Error("Please fill Performer above")
+    }
+
+    const data = {
+      repo: `${orgName}/${repoName}`,
+      who
+    }
+
+    const rawResponse = await fetch(host, {
+      method: 'POST',
+      headers: {
+        accept: "*/*",
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+    })
+
+    const content = await rawResponse.json()
+
+    const result = JSON.stringify(content, null, 2)
+
+    statusDiv.innerHTML = `response body:
+${result}
+
+please check the repo to ensure the envs are set.`
+
+    statusDiv.className = "success"
+    }
+    catch (e) {
+      statusDiv.innerHTML = e
+      statusDiv.className = "fail"
+    }
+    finally {
+      submitBtn.disabled = false
+    }
+  })
+</script>
