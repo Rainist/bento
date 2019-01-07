@@ -18,3 +18,10 @@ food (env) to be delivered (via slack) to travis
 ## Stragtegy
 - Lambda like serverless function way
 - providing the deployment in k8s via kubeless is first-class citizen
+
+## Components
+### [set-env](functions/set-env)
+> http service which actually performs setting environments variables into travis
+
+### [set-env-web](functions/set-env)
+> web interface to support easy operations
