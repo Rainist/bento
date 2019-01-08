@@ -33,7 +33,7 @@ function emitResponse(res, result) {
   const { status, env, allSuccess } = genResponse(result)
   res.status(status).json({ env, allSuccess })
 
-  return Promise.resolve('done')
+  return Promise.resolve(allSuccess)
 }
 
 function notifySuccess(repo, who) {
@@ -66,10 +66,11 @@ async function _add(rawRepo, who, res) {
     )
     .toPromise()
 
-  await emitResponse(res, result)
+  const isSuccess = await emitResponse(res, result)
 
   if(slackWebhookURL) {
-    await notifySuccess(rawRepo, who).catch(console.error)
+    const notifyFn = isSuccess ? notifySuccess : notifyFail
+    await notifyFn(rawRepo, who).catch(console.error)
   }
 }
 
