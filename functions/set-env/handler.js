@@ -37,12 +37,12 @@ function emitResponse(res, result) {
 }
 
 function notifySuccess(repo, who) {
-  const text = `env has set for ${repo} in travis by ${who}`
+  const text = `env has set for \`${repo}\` in travis by ${who}`
   return notify({text})
 }
 
 function notifyFail(repo, who) {
-  let text = `set env has *failed* for ${repo} in travis by ${who}`
+  let text = `set env has *failed* for \`${repo}\` in travis by ${who}`
 
   if(!repo || !who) {
     text = 'set env targeting travis has *failed* and either *repo* or *who* is not provided.'
@@ -69,7 +69,7 @@ async function _add(rawRepo, who, res) {
   await emitResponse(res, result)
 
   if(slackWebhookURL) {
-    await notifySuccess(repo, who).catch(console.error)
+    await notifySuccess(rawRepo, who).catch(console.error)
   }
 }
 
