@@ -100,7 +100,7 @@ function obscuredEnvs(envs) {
     .value();
 }
 
-async function fetch(event, context) {
+async function preset(event, context) {
   const {
     extensions: { response: res }
   } = event;
@@ -108,4 +108,4 @@ async function fetch(event, context) {
   res.json(obscuredEnvs(envs()));
 }
 
-module.exports = { add, fetch };
+module.exports = { add, preset };

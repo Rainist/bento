@@ -4,7 +4,7 @@ const _ = require("lodash");
 process.env.ENVS_FILE_PATH = "../examples/envs.json"; // relative to "../lib/config.js"
 process.env.TRAVIS_INFO_FILE_PATH = "../examples/travis.json";
 
-const { fetch } = require("../handler");
+const { preset } = require("../handler");
 const { makeResponse } = require("./mock-response");
 
 const envsObscured = [
@@ -42,14 +42,14 @@ const envsObscured = [
 
 describe("handler.js", () => {
   describe("Fetch", () => {
-    it("should fetch obscured envs", () => {
+    it("should fetch obscured envs preset", () => {
       const response = makeResponse({
         json: arg => {
           assert(JSON.stringify(arg) === JSON.stringify(envsObscured));
         }
       });
 
-      fetch({ extensions: { response } });
+      preset({ extensions: { response } });
     });
   });
 });
