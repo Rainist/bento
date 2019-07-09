@@ -91,4 +91,21 @@ async function add(event, context) {
   }
 }
 
-module.exports = { add };
+function obscuredEnvs(envs) {
+  return _(envs)
+    .map(env => {
+      if (env.public) return env;
+      return _.merge(env, { value: "(hidden)" });
+    })
+    .value();
+}
+
+async function fetch(event, context) {
+  const {
+    extensions: { response: res }
+  } = event;
+
+  res.json(obscuredEnvs(envs()));
+}
+
+module.exports = { add, fetch };
